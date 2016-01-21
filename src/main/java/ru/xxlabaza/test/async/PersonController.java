@@ -52,11 +52,11 @@ class PersonController {
     public void doAsync () {
         List<Integer> ids = personService.findAllIdsInRange(0, BATCH_SIZE * PARTITIONS);
         IntStream.range(0, PARTITIONS)
-                .forEach(index -> {
+                .mapToObj(index -> {
                     int from = index * BATCH_SIZE;
                     int to = Math.min(ids.size(), (index + 1) * BATCH_SIZE);
-                    personService.doAsync(ids.subList(from, to));
+                    return ids.subList(from, to);
                 })
-                /*.map(personService::doAsync)*/;
+                .forEach(personService::doAsync);
     }
 }
