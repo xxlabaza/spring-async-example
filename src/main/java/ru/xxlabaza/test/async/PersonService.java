@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 import lombok.SneakyThrows;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Async;
@@ -51,8 +52,8 @@ class PersonService {
             throw new RuntimeException("Oh no! It contains 2!");
         }
 
-        String ids = sequence.stream().map(Object::toString).collect(joining(", "));
-        String result = personRepository.findAll(sequence).stream().map(Person::toString).collect(joining(", "));
+        val ids = sequence.stream().map(Object::toString).collect(joining(", "));
+        val result = personRepository.findAll(sequence).stream().map(Person::toString).collect(joining(", "));
 
         System.out.format("\n" +
                 "THREAD:      %s\n" +

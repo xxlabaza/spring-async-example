@@ -16,6 +16,7 @@
 
 package ru.xxlabaza.test.async;
 
+import lombok.val;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -35,7 +36,7 @@ class TaskExecutorConfiguration {
 
     @Bean
     public ThreadPoolTaskExecutor myThreadPoolTaskExecutor () {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        val executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(1);
         executor.setMaxPoolSize(Runtime.getRuntime().availableProcessors() * 2);
         executor.setQueueCapacity(2);

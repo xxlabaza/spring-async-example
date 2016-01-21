@@ -15,8 +15,8 @@
  */
 package ru.xxlabaza.test.async;
 
-import java.util.List;
 import java.util.stream.IntStream;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -50,7 +50,7 @@ class PersonController {
     @RequestMapping
     @ResponseStatus(NO_CONTENT)
     public void doAsync () {
-        List<Integer> ids = personService.findAllIdsInRange(0, BATCH_SIZE * PARTITIONS);
+        val ids = personService.findAllIdsInRange(0, BATCH_SIZE * PARTITIONS);
         IntStream.range(0, PARTITIONS)
                 .mapToObj(index -> {
                     int from = index * BATCH_SIZE;
